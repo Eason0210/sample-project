@@ -1,0 +1,25 @@
+#+title: About an issue of project.el
+#+author: Eason Huang
+
+* Steps to reproduce
+
+1. Create an empty folder call ~.emacs.d~ (The name doesn't matter, you can use any name)
+2. cd ~.emacs.d~, and let's say i want to add ~vertico~ as an submodule
+   #+begin_src bash
+git init
+git submodule add --name vertico git@github.com:minad/vertico.git lib/vertico
+git add .
+git commit -m "add vertico"
+   #+end_src
+3. so far so good.
+4. Add load-path for extensions directory of vertico repo
+   #+begin_src
+[submodule "vertico"]
+	path = lib/vertico
+	url = git@github.com:minad/vertico.git
+	load-path = .
+	load-path = extensions
+   #+end_src
+5. Now perform ~M-x, project-find-file~ in the .emacs.d directory will cause the issue.
+
+I found that it's this line ~load-path = .~ cause the issue. Borg need this line to add the vertico directory to load-path when user add a subDirectory to load-path. May be it is an issue of Borg?
