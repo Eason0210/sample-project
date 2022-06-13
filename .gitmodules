@@ -1,0 +1,3 @@
+[submodule "vertico"]
+	path = lib/vertico
+	url = git@github.com:minad/vertico.git
